@@ -241,3 +241,66 @@ window.addEventListener("load", function () {
     }, 1000);
   }
 });
+
+// Counter Animation
+document.addEventListener("DOMContentLoaded", function () {
+  // Função para animar contadores
+  function animateCounters() {
+    const counters = document.querySelectorAll(".counter-number");
+    const speed = 200; // Quanto menor, mais rápido
+
+    counters.forEach((counter) => {
+      const updateCount = () => {
+        const target = parseInt(counter.getAttribute("data-count"));
+        const count = parseInt(counter.innerText);
+        const increment = Math.trunc(target / speed);
+
+        if (count < target) {
+          counter.innerText = count + increment;
+          setTimeout(updateCount, 1);
+        } else {
+          counter.innerText = target;
+        }
+      };
+
+      updateCount();
+    });
+  }
+
+  // Função para verificar se elemento está visível na viewport
+  function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  // Iniciar animação quando a seção estiver visível
+  function checkCounters() {
+    const counterSection = document.querySelector(".counter-item");
+    if (counterSection && isElementInViewport(counterSection)) {
+      animateCounters();
+      window.removeEventListener("scroll", checkCounters);
+    }
+  }
+
+  // Verificar ao carregar a página e ao rolar
+  window.addEventListener("scroll", checkCounters);
+  checkCounters();
+
+  // Efeitos hover para os elementos da seção Sobre
+  const featureItems = document.querySelectorAll(".about-feature-item");
+  featureItems.forEach((item) => {
+    item.addEventListener("mouseenter", function () {
+      this.querySelector(".feature-icon").style.transform = "rotate(360deg)";
+    });
+
+    item.addEventListener("mouseleave", function () {
+      this.querySelector(".feature-icon").style.transform = "rotate(0deg)";
+    });
+  });
+});
