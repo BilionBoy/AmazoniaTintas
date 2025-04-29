@@ -412,8 +412,8 @@ a:hover {
   height: 100%;
   background: linear-gradient(
     to right,
-    rgb(5 85 0 / 70%) 0%,
-    rgb(0 69 3 / 40%) 50%,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
     rgba(0, 0, 0, 0) 100%
   );
 }
@@ -574,17 +574,6 @@ a:hover {
   overflow: hidden;
   line-height: 0;
   z-index: 1;
-}
-
-.shape-divider svg {
-  position: relative;
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 80px;
-}
-
-.shape-divider .shape-fill {
-  fill: var(--white);
 }
 
 /* About Section */
